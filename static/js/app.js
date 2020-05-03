@@ -35,9 +35,18 @@ fetch("http://l0rd-z-19.github.io/jsonStorage/samples.json")
         var bubData = [bub];
         Plotly.newPlot("bubbles", bubData);
 
-
-
-
+        //metadata and demographic information
+        var metadata = json["metadata"];
+        console.log(metadata[0]);
+        var pan = d3.select("#sample-metadata");
+        for(i=0; i < 7;i++){
+            row = pan.append('h5');
+            Object.entries(metadata[0]).forEach(function([key,value]){
+                var tex = "{key}: {value}".replace("{key}", key)
+                var texf = tex.replace("{value}", value)
+                row.text(texf);
+            });
+        }
 
 
 
