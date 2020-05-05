@@ -1,3 +1,4 @@
+//Grab the data off of my github pages data site
 fetch("http://l0rd-z-19.github.io/jsonStorage/samples.json")
     .then(function(resp){
         return resp.json();
@@ -12,15 +13,19 @@ fetch("http://l0rd-z-19.github.io/jsonStorage/samples.json")
         opt.text = " ";
         selData.add(opt);
         //fill the dropdown values
-        for(i=0; i < 152;i++){
+        for(i=0; i < 153;i++){
             opt = document.createElement("option");
             opt.text = metadata[i]["id"];
             selData.add(opt);
         }
+        console.log(selData);
         //if the dropdown changes, update the page
         selData.addEventListener("change",function(){
-            bellyBtn = selData.value - 940; 
-            
+            for(i=0; i < 153; i++){
+                if(metadata[i]["id"] == selData.value){
+                    bellyBtn = i;
+                }
+            }
             //left side bar chart
             var top = samples[bellyBtn].otu_ids.slice(0,10);
             var labels = [];
@@ -55,11 +60,15 @@ fetch("http://l0rd-z-19.github.io/jsonStorage/samples.json")
             var bubData = [bub];
             Plotly.newPlot("bubbles", bubData);
 
+            //empty the previous pannel
+            var empPan = d3.selectAll("h4");
+            empPan.text("");
+
             //metadata and demographic information
             var pan = d3.select("#sample-metadata");
             keys = ["id","ethnicity","gender","age","location","Beaufort/NC","bbtype","wfreq"];
             for(i=0; i < 8;i++){
-                row = pan.append('h5');
+                row = pan.append('h4');
                 var tex = "{key}: {value}".replace("{key}", keys[i])
                 var texf = tex.replace("{value}", metadata[bellyBtn][keys[i]])
                 row.text(texf);
