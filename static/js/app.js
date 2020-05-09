@@ -3,7 +3,7 @@
 //     .then(function(resp){
 //         return resp.json();
 //     })
-d3.json("/data/samples.json")
+d3.json("data/samples.json")
     .then(function(json){
         var metadata = json["metadata"];  
         var samples = json["samples"];
