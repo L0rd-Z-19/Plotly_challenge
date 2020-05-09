@@ -1,8 +1,9 @@
 //Grab the data off of my github pages data site
-fetch("http://l0rd-z-19.github.io/jsonStorage/samples.json")
-    .then(function(resp){
-        return resp.json();
-    })
+// fetch("https://1drv.ms/u/s!AosvmuNtZGWogZ5Vg9RKJK4Wr-QRrQ?e=hmMofi")
+//     .then(function(resp){
+//         return resp.json();
+//     })
+d3.json("/data/samples.json")
     .then(function(json){
         var metadata = json["metadata"];  
         var samples = json["samples"];
